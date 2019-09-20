@@ -2,7 +2,7 @@
 library(tidyverse)
 library(vroom)
 library(lubridate)
-
+library(readxl)
 
 # Caged -------------------------------------------------------------------
 
@@ -54,5 +54,33 @@ raisVinculo <- vroom("dados/RAIS/fat_RAIS_Vinculo.csv") %>%
 raisVinculo %>% 
   select(cboocupação2002,cnae20classe,cnae20subclasse,escolaridadeapos2005,faixaetária,
          município,sexotrabalhador,ibgesubsetor,vlremunmedianom) -> raisVinculoTratada
+
 vroom_write(raisVinculoTratada,
             path = "dados/raisVinculo.csv")
+
+
+# Comex -------------------------------------------------------------------
+
+
+# Dados Exportação
+exp1 <- read_xlsx("dados/Comex Stat/Exportação SC - 2018 - 01-04.xlsx") %>% 
+  as_tibble()
+exp2 <- read_xlsx("dados/Comex Stat/Exportação SC - 2018 - 05-08.xlsx") %>% 
+  as_tibble()
+exp3 <- read_xlsx("dados/Comex Stat/Exportação SC - 2018 - 09-12.xlsx") %>% 
+  as_tibble()
+
+
+exp <- bind_rows(exp1,exp2,exp3)
+
+exp %>% 
+  mutate(Município = str_remove(Município," - SC")) %>% 
+  glimpse()
+
+
+unique(exp$`Bloco Econômico`)
+exp %>% 
+  #filter(`Bloco Econômico`=="Mercado Comum do Sul - Mercosul") %>% 
+  filter(`Bloco Econômico`=="América do Sul")
+
+
