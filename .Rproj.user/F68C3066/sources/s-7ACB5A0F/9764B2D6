@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1569016710564.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9764B2D6",
+    "lastKnownWriteTime" : 1569020009,
+    "last_content_update" : 1569021568899,
+    "path" : "D:/Documentos/Pos_Cientista_Dados/01hack/Analise/02ETL.R",
+    "project_path" : "02ETL.R",
+    "properties" : {
+        "cursorPosition" : "58,0",
+        "scrollLine" : "46",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
