@@ -42,6 +42,7 @@ raisEstabelecimento <- vroom("dados/RAIS/fat_RAIS_Estabelecimentos.csv") %>%
 
 raisEstabelecimento %>% 
   select(municipio,cnae20classe,cnae20subclasse,qtdvínculosclt,qtdvínculosativos,uf,ibgesubsetor) %>% 
+  mutate(ano = "01/01/2018") %>% 
   mutate_at(vars(contains("qtd")),function(x){as.double(x)}) -> raisEstabelecimentoTratado
 
 vroom_write(x = raisEstabelecimentoTratado,
@@ -53,7 +54,8 @@ raisVinculo <- vroom("dados/RAIS/fat_RAIS_Vinculo.csv") %>%
 
 raisVinculo %>% 
   select(cboocupação2002,cnae20classe,cnae20subclasse,escolaridadeapos2005,faixaetária,
-         município,sexotrabalhador,ibgesubsetor,vlremunmedianom) -> raisVinculoTratada
+         município,sexotrabalhador,ibgesubsetor,vlremunmedianom) %>%
+  mutate(ano = "01/01/2018") -> raisVinculoTratada
 
 vroom_write(raisVinculoTratada,
             path = "dados/raisVinculo.csv")
@@ -100,6 +102,7 @@ imp %>%
   mutate(Tipo = "Import") -> impTratado
 
 
-comerExterior <- bind_rows(expTratado,impTratado)
+comerExterior <- bind_rows(expTratado,impTratado) %>% 
+  mutate(data = paste("01/",Mês,"/2018"))
 
 vroom_write(x = comerExterior,path = "dados/comercioExterior.csv")
