@@ -57,8 +57,8 @@ raisVinculo %>%
          município,sexotrabalhador,ibgesubsetor,vlremunmedianom) %>%
   mutate(ano = "01/01/2018") -> raisVinculoTratada
 
-vroom_write(raisVinculoTratada,
-            path = "dados/raisVinculo.csv")
+write.csv(x = raisVinculoTratada,
+          file = "dados/raisVinculo.txt")
 
 
 # Comex -------------------------------------------------------------------
