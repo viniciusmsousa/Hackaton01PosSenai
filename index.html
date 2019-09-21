@@ -1,0 +1,288 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Interpretacao de algoritmos de classificacao</title>
+
+    <meta name="description" content="hackaton01PosSenai">
+    <meta name="author" content="Vinicius Melquiades de Sousa">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/prism.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+        src="prism.js"
+    </script>
+
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        h1, h2, h3 {
+            text-shadow: 7px 7px 10px #000000 !important;
+        }
+
+        div.slides {
+            text-shadow: 3px 3px 1px #1c1e20 !important;
+        }
+        
+        blockquote {
+            background: rgba(180, 180, 180, 0.2);
+        }
+        
+        blockquote {
+            text-align: left;
+            width: 90% !important;
+        }
+
+        div.author {
+            text-align: right;
+            margin-right: 10pt;
+        }
+
+        div.author:before {
+            content: '(';
+        }
+
+        div.author:after {
+            content: ')';
+        }
+
+        section.center p {
+            text-align: center;
+        }
+
+        p img {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block;
+            border: 1px solid #2b2b2b !important;
+        }
+        p {
+            text-align: justify;
+        }
+        .side {
+            text-align: center;
+            margin: 0px !important;
+            padding: 0px !important;
+            border: 0px !important;
+        }
+        .side img { 
+            display: inline;
+            margin: 0px !important;
+            padding: 0px !important;
+            border: 0px !important;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .small {
+            font-size: 32px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+
+        <section class="center" data-background-image="images/matrix-2354492.jpg">
+            <h2>Data Analysis as a Service</h2>
+            <h3>para</h3>
+            <h2>Prefeituras</h2>
+            
+            
+            <small align="left">
+            <a href="https://www.linkedin.com/in/ana-caroline-cooper-b8b49012a/">Ana Cooper</a><br>
+            <a href="https://www.linkedin.com/in/gustavo-lobenwein-64155220/">Gustavo G. Lobenwein</a><br>
+            <a href="https://www.linkedin.com/in/marciofcampos/">Marcio Furukawa Campos</a><br>
+            <a href="https://www.linkedin.com/in/viniciusmsousa/">Vinicius M. de Sousa</a><br>
+            </small>
+            </p>
+                <small>Florianopolis - Senai / 21 de Setembro de 2019</small> 
+            
+        </section>
+
+        
+        <section>
+            <section data-transition="zoom" data-background="https://media.giphy.com/media/3bb8gKWNwYI9Z6hgBB/giphy.gif">
+                <h1>Kick-Off</h1>
+            </section>
+
+            <section data-background-iframe="https://www.observatoriofiesc.com.br/observatorio" data-background-interactive>
+                <h2>O Case:</h2>
+                <ol>
+                    <li>Cliente: Observatório de </li>
+                    <li>Local Interpretable Model-Agnostic Explanations</li>
+                    <li>Implementação (ouR time to do it)</li>
+                </ol>                
+           
+            </section>
+
+
+            <section data-background-image="images/matrix-2354492.jpg">
+                <h2>Plano De Vôo</h2>
+                <ol>
+                	<li>Machine Learning 101</li>
+                	<li>Local Interpretable Model-Agnostic Explanations</li>
+                	<li>Implementação (ouR time to do it)</li>
+                		
+                </ol>                
+            </section>
+        </section>
+        
+        <section>
+            <section data-transition="zoom" data-background="https://media.giphy.com/media/NvMls3V5aID4c/giphy.gif" >
+                <h2>Machine Learning 101</h2>
+            </section>
+
+            <section data-background-image="images/matrix-2354492.jpg">
+            	<h3>Questionário rápido</h3>
+            	<ol>
+                	<li class="fragment fade-up">Quem já ouviu falar o termo "Machine Learning"?</li>
+                	<li class="fragment fade-up">Quem sabe o que é "Machine Learning"?</li>
+                	<li class="fragment fade-up">Quem usa "Machine Learning"?</li>
+                		
+                </ol>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            	<h3>Sobre Machine Learning</h3>
+            	<ol>
+                	<li class="fragment fade-up">Sub campo da inteligência artificial;</li>
+                	<li class="fragment fade-up">Objetivo é ter programas de computadores que aprendem padrões nos dados;</li>
+                	<li class="fragment fade-up">Costumam ser mais preditivos que modelos estatísticos, mas não tem interpretação;</li>
+                	<li class="fragment fade-up">E daí surge o termo...</li>                		
+                </ol>
+            </section>
+             <section data-transition="zoom" data-background="https://media.giphy.com/media/3o6Zt6QKQiCD7TQeNW/giphy.gif">
+             	<h3 class="fragment fade-up">Caixa Preta</h3>
+                <span class="fragment fade-up">Em outras palavras o ponto fraco de algoritmos de "Machine Learning" é a falta de iterpretabilidade do que o modelo está aprendendo.</span>
+            </section>
+        </section> 
+
+
+        <section>
+            <section data-transition="zoom" data-background="https://media.giphy.com/media/1BeVZZ6FalGmJnvQvJ/giphy.gif" >
+                <h3>Local Interpretable Model-Agnostic Explanations</h3>
+            </section>
+
+             <section data-background-iframe="https://arxiv.org/pdf/1602.04938.pdf" data-background-interactive>
+            	    <div class="fragment fade-up" style="position: absolute; width: 95%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+                        <h1>Resumindo:</h1>
+                        <h2 class="fragment fade-up"> Propõe-se um algoritmo que explica quais as variáveis (features) mais importantes para explicar variações locais em observações do seu conjunto de dados.</h2>
+                    </div>
+            </section>
+
+             	
+        </section>
+
+        <section>
+            <section data-transition="zoom" data-background="https://media.giphy.com/media/3o6Yg4GUVgIUg3bf7W/giphy.gif" >
+                <h3>Implementação (ou<span style="display: inline-block;" class="fragment grow highlight-blue">R</span> time to do it)</h3>
+            </section>
+
+            <section data-background-iframe="https://cran.r-project.org/web/packages/lime/index.html" data-background-interactive>
+            	    <div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+                        <h3>Existe uma implementação pronta</h3>
+                        <h4>(Exemplo baseado em <a href="http://uc-r.github.io/lime">http://uc-r.github.io/lime</a>)</h4>
+                        <span style="display: inline-block;" class="fragment fade-up"><h1>Mas antes,</h1></span>
+                        <span style="display: inline-block;" class="fragment fade-up"><h3>vamos ver o outline do que foi feito</h3></span>
+                    </div>
+            </section>
+            <section data-background-image="images/drakePlan.jpg"  data-background-transition="zoom">
+            	<div class="fragment fade-up" style="position: absolute; width: 95%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+                        <h2>Problema: Predizer qual funcionário vai ter atrito no trabalho.</h2>
+                        <h1 class="fragment fade-up">Demonstração</h1>
+                    </div>
+            </section>
+
+             	
+        </section>
+
+
+            <section data-background-image="images/matrix-2354492.jpg">
+                <h4>Obrigado pela Atenção</h4>
+                <div class="row">
+                    <div class="column">
+                        <h3>Vinícius M. de Sousa</h3>
+                        <h6>Economista e Cientista de Dados</h6>
+                        <ul>
+                            <li style="font-size: 30px"><a href="https://www.linkedin.com/in/viniciusmsousa/">in/viniciusmsousa/</a></li>
+                            <li style="font-size: 30px"><a href="github.com/viniciusmsousa/">github.com/viniciusmsousa</a></li>
+                            <li style="font-size: 30px"><a href="mailto:vinisousa04@gmail.com">&lt;vinisousa04@gmail.com&gt;</a></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                    		<img src="images/qr_code_in.png" height="280" width="280">
+                    </div>
+
+                    <h3 class=" fragment fade-up">Dúvidas/Perguntas/Considerações/Sugestões?</h3>
+                </div>
+            </section>
+
+        </section>
+
+
+
+
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+
+        controls: true,
+        progress: true,
+        history: true,
+
+        transition: 'convex', // none/fade/slide/convex/concave/zoom
+        slideNumber: 'c/t',
+        showSlideNumber : 'speaker',
+
+
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
