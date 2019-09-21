@@ -74,13 +74,32 @@ exp3 <- read_xlsx("dados/Comex Stat/Exportação SC - 2018 - 09-12.xlsx") %>%
 exp <- bind_rows(exp1,exp2,exp3)
 
 exp %>% 
-  mutate(Município = str_remove(Município," - SC")) %>% 
-  glimpse()
+  select(`Mês`,País,Município, `UF do Município`, `Codigo SH4`,`Descrição SH4`, `Bloco Econômico`,`2018 - Valor FOB (US$)`) %>% 
+  mutate(Município = str_remove(Município," - SC")) %>%
+  group_by(Município,País,`Mês`) %>% 
+  distinct(`2018 - Valor FOB (US$)`,.keep_all = T) %>% 
+  mutate(Tipo = "Export") -> expTratado
 
 
-unique(exp$`Bloco Econômico`)
-exp %>% 
-  #filter(`Bloco Econômico`=="Mercado Comum do Sul - Mercosul") %>% 
-  filter(`Bloco Econômico`=="América do Sul")
+
+# Dados Importação
+imp1 <- read_xlsx("dados/Comex Stat/Importação SC - 2018 - 01-04.xlsx") %>% 
+  as_tibble()
+imp2 <- read_xlsx("dados/Comex Stat/Exportação SC - 2018 - 05-08.xlsx") %>% 
+  as_tibble()
+imp3 <- read_xlsx("dados/Comex Stat/Exportação SC - 2018 - 09-12.xlsx") %>% 
+  as_tibble()
+
+imp <- bind_rows(imp1,imp2,imp3)
+
+imp %>% 
+  select(`Mês`,País,Município, `UF do Município`, `Codigo SH4`,`Descrição SH4`, `Bloco Econômico`,`2018 - Valor FOB (US$)`) %>% 
+  mutate(Município = str_remove(Município," - SC")) %>%
+  group_by(Município,País,`Mês`) %>% 
+  distinct(`2018 - Valor FOB (US$)`,.keep_all = T) %>% 
+  mutate(Tipo = "Import") -> impTratado
 
 
+comerExterior <- bind_rows(expTratado,impTratado)
+
+vroom_write(x = comerExterior,path = "dados/comercioExterior.csv")
