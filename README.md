@@ -1,3 +1,5 @@
 # Hackaton-01 PosSenai
 
-Repositório com a parte desenvolvida em R, em especial a parte de transformação de tabelas.
+Repositório com apresentação e códigos (dentro da pasta ETLMvp) desenvolvidos para o Hackaton.
+
+A apresentação pode ser acessada no link: https://viniciusmsousa.github.io/Hackaton01PosSenai/#/
